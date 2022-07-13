@@ -76,8 +76,14 @@ WSGI_APPLICATION = 'cash.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME' : 'postgesql',
+        'HOST' : 'ec2-54-228-125-183.eu-west-1.compute.amazonaws.com',
+        'NAME' : 'ddg8qgncf1iv4u',
+        'USER' : 'kadgoblrblppqd',
+        'PORT' :'5432',
+        'ENGINE': 'django.db.backends.postgresql',
+        'PASSWORD' :'4a54ca8c793a9ebec85d12193c03a802f333907095fa4950cdd162cba37c5499' ,
+        
     }
 }
 
