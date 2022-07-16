@@ -15,7 +15,6 @@ def main(req):
         transaction.sender = req.user
 
         sender_balance = query_balacne(req.user,transaction.currency_type)
-        
 
         
         transaction_is_valid  = valdidate_tansaction(
@@ -25,7 +24,7 @@ def main(req):
                                                                     )
 
         if transaction_is_valid:
-            transact_money(sender_balance,transaction.reciever,transaction.amount)
+            transact_money(sender_balance,transaction.reciever,transaction.amount,transaction.currency_type)
             transaction.date_time = datetime.now()
             transaction.save() 
 
