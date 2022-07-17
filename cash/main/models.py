@@ -12,6 +12,7 @@ class Balance(models.Model):
 
 class Transcation(models.Model):
     sender = models.ForeignKey(User,on_delete=models.CASCADE,related_name="sender")
+    # databases needs to be rested to fix this spelling mistake
     reciever = models.ForeignKey(User,on_delete=models.CASCADE,related_name="reciever")
 
     date_time = models.CharField(max_length=50)
