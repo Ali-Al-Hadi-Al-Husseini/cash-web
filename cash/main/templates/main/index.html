@@ -1,0 +1,55 @@
+{% extends 'main/base.html'%}
+{% block title %}Login{% endblock %} 
+{% load crispy_forms_tags %} 
+{% block content %}
+    {% for msg in messages%}
+        <div class="alert alert-success alert-dismissible fade show " role="alert">
+            <strong> {{msg}}</strong>
+            <button type="button" class="close btn " style="float: right;margin-top: -9px;margin-right: -3%;" data-dismiss="alert" aria-label="Close">
+                <strong><span aria-hidden="true">&times;</span></strong>
+            </button>
+        </div>
+    {% endfor %}
+
+    <div class="half" style="float:left;margin-top:6%;">
+        <form method="post">
+        {% csrf_token %}{{form|crispy}}
+        <button type="submit" class="btn btn-success">send</button>
+        </form>
+    </div>
+
+    <div class="half" style="float:right;">
+        <table class="table">
+            <thead>
+                <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                </tr>
+                <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+                </tr>
+                <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@twitter</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+            <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+{% endblock %}
