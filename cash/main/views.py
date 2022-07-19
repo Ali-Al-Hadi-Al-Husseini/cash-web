@@ -5,12 +5,18 @@ from .forms import RegistrationForm, TransactionForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
-from .utils import create_balances, validate_form, valdidate_tansaction, transact_money, query_balacne
+from .utils import create_balances, validate_form,validate_tansaction, transact_money, query_balacne, get_transactions
 from django.contrib import messages
 # Create your views here.
 @login_required(login_url="/login")
 def main(req):
-    return render(req,"main/index.html",{})
+
+    transactions = get_transactions(req.user.id)
+    args = {}
+    args['transactions'] = transactions
+    
+
+    return render(req,"main/index.html",args)
 
 @login_required(login_url="/login")
 def transact(req):
@@ -19,14 +25,15 @@ def transact(req):
     if form_is_valid:
         transaction = form.save(commit=False)
         transaction.sender = req.user
-
         sender_balance = query_balacne(req.user,transaction.currency_type)
 
-        transaction_is_valid , error = valdidate_tansaction(
-                                                                    sender_balance.values()[0] ,
-                                                                    transaction.amount,
-                                                                    form.cleaned_data['pay_pin'],
-                                                                    )
+        transaction_is_valid , transaction_error = validate_tansaction(
+                                                            req.user.id,
+                                                            sender_balance.values()[0] ,
+                                                            transaction.amount,
+                                                            form.cleaned_data['pay_pin'],
+                                                            transaction.reciever
+                                                            )
 
         if transaction_is_valid:
 
@@ -35,9 +42,9 @@ def transact(req):
             transaction.save() 
 
             messages.success(req, f"{transaction.amount} {transaction.currency_type} was sent to {transaction.reciever} successfully")
-            return redirect("/")
+            return redirect("/transact")
         
-        
+        messages.warning(req, transaction_error)
 
     return render(req,"main/transact.html",{'form':form})
 

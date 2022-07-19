@@ -2,34 +2,52 @@
 {% block title %}Login{% endblock %} 
 {% load crispy_forms_tags %} 
 {% block content %}
+
+    <div>
+
+        
+    </div>
+
+    <div></div>
     <table class="table">
         <thead>
             <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
+
+            <th scope="col">From</th>
+            <th scope="col">Time</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Currency</th>
+            <th scope="col">To</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            </tr>
-            <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-            </tr>
-            <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-            </tr>
+    {% comment %} green #93ffeb  red #f79393{% endcomment %}
+    {% for trans in transactions%}
+            {% if  trans.5 %}
+                <tr style="color: #721c24;
+                            background-color: #f8d7da;
+                            border-color: #f5c6cb;">
+
+                    <td>{{trans.0}}</td>
+                    <td>{{trans.1}} </td>
+                    <td> -{{trans.2}}</td>
+                    <td>{{trans.3}}</td>
+                    <td>{{trans.4}}</td>
+
+                </tr>
+            {% else %}
+                <tr style="color: #155724;
+                        background-color: #d4edda;
+                        border-color: #c3e6cb;">
+                    <td>{{trans.0}}</td>
+                    <td>{{trans.1}} ago</td>
+                    <td> {{trans.2}}</td>
+                    <td>{{trans.3}}</td>
+                    <td>{{trans.4}}</td>
+                </tr>
+            {% endif %}
+    {% endfor%}
+
         </tbody>
     </table>
             <!-- jQuery library -->

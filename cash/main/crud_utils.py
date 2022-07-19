@@ -1,21 +1,26 @@
-from .models import Balance,Transcation
+from .models import Balance,Transcation, User
 from datetime import datetime
 
 def query_balacne(owener,currency):
     return Balance.objects.filter(owner=owener.id,currency_type=currency)
 
+def query_user(id):
+    return User.objects.filter(id= id).values()[0]
+
 def update_balance(balance,amount):
     current_amount = balance.values()[0]["amount"]
     balance.update(amount=current_amount + amount)
 
-def valdidate_tansaction(balance, amount,pin):
+def validate_tansaction(sender_id,balance, amount,pin, rec):
+    if sender_id == rec.id:
+        return False , "Can't send money to your self"
     if balance['amount'] > amount:
         if balance['pay_pin'] == pin:
             return True ,""
         else:
-            return 'pay_pin'
+            return False,'Pay-Pin is not correct'
         
-    return False ,"amount"
+    return False ,"You dont have enough money!"
 
 def transact_money(sender_balance,rec,amount,currency):
     rec_balance = query_balacne(rec,currency)
@@ -23,18 +28,8 @@ def transact_money(sender_balance,rec,amount,currency):
     update_balance(rec_balance,amount)
 
 
-def create_balances(owner,pay_pin):
-    USD_balance = Balance.objects.create(amount=1_000_000,
-                                        pay_pin=pay_pin,
-                                        currency_type = "USD",
-                                        owner = owner,
-                                        )
-    LB_balance = Balance.objects.create(amount=0,
-                                        pay_pin=pay_pin,
-                                        currency_type = "LB",
-                                        owner = owner,
-                                        )
-def get_transactions(user):
+
+def get_transactions_value(user):
     sent_transactionss = Transcation.objects.filter(sender = user )
     reciever_transactions = Transcation.objects.filter(reciever = user )
 
@@ -70,17 +65,39 @@ def subtract_time(date_time,date_time2):
                     if mins_differnce == 0:
                         secs_differnce = abs( int(date[6:-1]) - int(date2[6:-1]))
 
-                        return str(secs_differnce) + 'sec'
+                        return pluralize(secs_differnce , ' sec')
 
-                    return str(mins_differnce) + ' min'
+                    return pluralize(mins_differnce , ' min')
 
-                return str(hours_differnce) + ' hour'
+                return pluralize(hours_differnce , ' hour')
 
-            return str(days_differnce) + " day" 
+            return pluralize(days_differnce , " day" )
 
-        return str(months_differnce) + " month"
+        return pluralize(months_differnce, " month")
 
-    return str(years_differnce) + " years"
+    return pluralize(years_differnce , " year")
 
-def reformat_transasctions(transction):
-    pass
+def pluralize(num,date):
+    if date == ' sec' and num == 0 : return 'Now'
+    if num > 1 : return str(num) + date + "s" + ' ago'
+    return str(num) +  date +' ago'
+
+def reformat_transasctions(transction,user):
+    return  [
+            transction['sender_id'],
+            get_transactions_time(transction),
+            transction['amount'],
+            transction['currency_type'],
+            transction["reciever_id"],
+            user == transction['sender_id']
+
+    ]
+
+def get_transactions(user):
+    transactions_value = get_transactions_value(user)
+    reformated_transactions = []
+
+    for values in transactions_value:
+        reformated_transactions.append(reformat_transasctions(values,user))
+
+    return reformated_transactions
