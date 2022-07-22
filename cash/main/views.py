@@ -1,20 +1,25 @@
-from distutils.log import error
-from urllib import request
 from django.shortcuts import render, redirect
 from .forms import RegistrationForm, TransactionForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
-from .utils import create_balances, validate_form,validate_tansaction, transact_money, query_balacne, get_transactions
+from .utils import create_balances, validate_form,validate_tansaction, transact_money, query_balance, get_transactions
 from django.contrib import messages
 # Create your views here.
+
 @login_required(login_url="/login")
 def main(req):
-
-    transactions = get_transactions(req.user.id)
     args = {}
-    args['transactions'] = transactions
+    transactions = get_transactions(req.user.id)
     
+    args['transactions'] = transactions
+    args["id"] = req.user.id
+
+    args['lb_balance'] = query_balance(req.user,'LB').values()[0]["amount"]
+    args['usd_balance'] = query_balance(req.user,'USD').values()[0]["amount"]
+    args['lb_qrcode'] = f"qrcode/{req.user}_--_LB.png"
+    args['usd_qrcode'] = f"qrcode/{req.user}_--_USD.png"
+
 
     return render(req,"main/index.html",args)
 
@@ -25,23 +30,23 @@ def transact(req):
     if form_is_valid:
         transaction = form.save(commit=False)
         transaction.sender = req.user
-        sender_balance = query_balacne(req.user,transaction.currency_type)
+        sender_balance = query_balance(req.user,transaction.currency_type)
 
         transaction_is_valid , transaction_error = validate_tansaction(
                                                             req.user.id,
                                                             sender_balance.values()[0] ,
                                                             transaction.amount,
                                                             form.cleaned_data['pay_pin'],
-                                                            transaction.reciever
+                                                            transaction.receiver
                                                             )
 
         if transaction_is_valid:
 
-            transact_money(sender_balance,transaction.reciever,transaction.amount,transaction.currency_type)
+            transact_money(sender_balance,transaction.receiver,transaction.amount,transaction.currency_type)
             transaction.date_time = datetime.now()
             transaction.save() 
 
-            messages.success(req, f"{transaction.amount} {transaction.currency_type} was sent to {transaction.reciever} successfully")
+            messages.success(req, f"{transaction.amount} {transaction.currency_type} was sent to {transaction.receiver} successfully")
             return redirect("/transact")
         
         messages.warning(req, transaction_error)

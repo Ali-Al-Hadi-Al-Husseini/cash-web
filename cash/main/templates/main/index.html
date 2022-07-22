@@ -1,14 +1,25 @@
 {% extends 'main/base.html'%}
+{% load static%}
 {% block title %}Login{% endblock %} 
 {% load crispy_forms_tags %} 
+
 {% block content %}
 
-    <div>
+    <div class="balance-container">
+        <div class="card card-width" style="width: 20rem;">
+        <img class="card-img-top" src="{% static usd_qrcode  %}" alt="Card image cap">
+        <div class="card-body">
+            <h3 class="card-title">Balance: {{usd_balance}}$</h5>
+        </div>
+        </div>
 
-        
+        <div class="card card-width" style="width: 20rem;">
+        <img class="card-img-top" src="{% static lb_qrcode  %}" alt="Card image cap">
+        <div class="card-body">
+            <h3 class="card-title">Balance: {{lb_balance}}L.L</h5>
+        </div>
+        </div>
     </div>
-
-    <div></div>
     <table class="table">
         <thead>
             <tr>

@@ -1,6 +1,9 @@
 {% extends 'main/base.html'%}
+{% load static %}
 {% block title %}Login{% endblock %} 
 {% load crispy_forms_tags %} 
+{%block head%}
+{%endblock%}
 {% block content %}
     {% for msg in messages%}
         {%if msg.tags == 'warning' %}
@@ -23,6 +26,33 @@
     <form method="post">
     {% csrf_token %}{{form|crispy}}
     <button type="submit" class="btn btn-success">send</button>
+    <button class="btn btn-primary" id="scan-button">Scan</button>
+    <button id="click-photo">Click Photo</button>
     </form>
 
+    <video id="video" width="320" height="240" autoplay></video>
+
+    <script>
+        let camera_button = document.querySelector("#scan-button");
+        let video = document.querySelector("#video");
+        let click_button = document.querySelector("#click-photo");
+        let canvas = document.querySelector("#canvas");
+        let scanning = false
+
+        camera_button.addEventListener('click', async function() {
+            let stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+            video.srcObject = stream;
+
+        });
+
+        click_button.addEventListener('click', function() {
+            
+            let image_data_url = canvas.toDataURL('image/jpeg');
+
+            stream.getTracks().forEach(function(track) {
+                track.stop();
+              });
+            console.log(image_data_url);
+        });
+    </script>
 {% endblock %}

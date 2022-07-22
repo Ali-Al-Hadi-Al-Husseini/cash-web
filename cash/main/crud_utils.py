@@ -1,12 +1,14 @@
 from .models import Balance,Transcation, User
 from datetime import datetime
 
-def query_balacne(owener,currency):
+def query_balance(owener,currency):
     return Balance.objects.filter(owner=owener.id,currency_type=currency)
 
 def query_user(id):
     return User.objects.filter(id= id).values()[0]
 
+def query_balances(owner):
+    pass
 def update_balance(balance,amount):
     current_amount = balance.values()[0]["amount"]
     balance.update(amount=current_amount + amount)
@@ -23,7 +25,7 @@ def validate_tansaction(sender_id,balance, amount,pin, rec):
     return False ,"You dont have enough money!"
 
 def transact_money(sender_balance,rec,amount,currency):
-    rec_balance = query_balacne(rec,currency)
+    rec_balance = query_balance(rec,currency)
     update_balance(sender_balance,-amount) 
     update_balance(rec_balance,amount)
 
@@ -31,9 +33,9 @@ def transact_money(sender_balance,rec,amount,currency):
 
 def get_transactions_value(user):
     sent_transactionss = Transcation.objects.filter(sender = user )
-    reciever_transactions = Transcation.objects.filter(reciever = user )
+    receiver_transactions = Transcation.objects.filter(receiver = user )
 
-    all_transactions =  reciever_transactions | sent_transactionss
+    all_transactions =  receiver_transactions | sent_transactionss
     all_transactions = all_transactions.order_by('-id')[:5]
 
     return all_transactions.values()
@@ -88,7 +90,7 @@ def reformat_transasctions(transction,user):
             get_transactions_time(transction),
             transction['amount'],
             transction['currency_type'],
-            transction["reciever_id"],
+            transction["receiver_id"],
             user == transction['sender_id']
 
     ]

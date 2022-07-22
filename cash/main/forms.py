@@ -3,7 +3,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import Transcation
-from .emails_set import temp_email_domains
+from .constants import temp_email_domains , Currencies
 from .utils import query_user
 
 class RegistrationForm (UserCreationForm):
@@ -33,27 +33,19 @@ class RegistrationForm (UserCreationForm):
 
 class TransactionForm(forms.ModelForm):
     pay_pin = forms.IntegerField(required=True)
-    # currency_type = forms.CharField(required=True)
+    amount = forms.DecimalField(required=True,min_value=0)
 
     def clean_currency_type(self):
         currency = self.cleaned_data.get("currency_type")
 
-        if currency != "LB" and currency != "USD":
+        if currency not in Currencies:
             raise forms.ValidationError("You can only send LB or USD")
 
         return currency
 
-    # def clean_pay_pin(self):
-    #     pay_pin = self.cleaned_data.get("pay_pin")
-    #     # user_id = self.cleaned_data.get("sender")
-    #     # user = query_user(user_id)
-    #     print("oder 2 pay_pim |||||||||||||||||||||")
-    #     if pay_pin == "0":
-    #         raise forms.ValidationError("pay_pin is not correct")
 
-    #     return pay_pin
     class  Meta:
         model = Transcation
-        fields = ['amount','reciever','pay_pin',"currency_type"]
+        fields = ['amount','receiver','pay_pin',"currency_type"]
 
 
