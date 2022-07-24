@@ -3,6 +3,7 @@
 {% block title %}Login{% endblock %} 
 {% load crispy_forms_tags %} 
 {%block head%}
+<script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
 {%endblock%}
 {% block content %}
     {% for msg in messages%}
@@ -27,32 +28,49 @@
     {% csrf_token %}{{form|crispy}}
     <button type="submit" class="btn btn-success">send</button>
     <button class="btn btn-primary" id="scan-button">Scan</button>
-    <button id="click-photo">Click Photo</button>
+
     </form>
-
-    <video id="video" width="320" height="240" autoplay></video>
-
+    <div id="reader" width="600px"></div>
     <script>
-        let camera_button = document.querySelector("#scan-button");
-        let video = document.querySelector("#video");
-        let click_button = document.querySelector("#click-photo");
-        let canvas = document.querySelector("#canvas");
-        let scanning = false
+        function findTheOne(elemnts,info){
 
-        camera_button.addEventListener('click', async function() {
-            let stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
-            video.srcObject = stream;
+            for (let i =0 ; i < elemnts.length;i++){
+                console.log(elemnts[i].innerHTML)
+                if(elemnts[i].innerHTML == info){
+                    elemnts[i].selected = 'selected'
+                    console.log("selected")
+                }
+            }
+        }
+        let ID = document.querySelector("#id_receiver").querySelectorAll('option')
+        let currencyElem = document.querySelector("#id_currency_type").querySelectorAll('option')
 
-        });
-
-        click_button.addEventListener('click', function() {
+        function onScanSuccess(decodedText, decodedResult) {
+            let splitted =decodedText.split("_--_")
+            let user = splitted[0]
+            let currency = splitted[1]
+            let symbol = '$'
+            if(currency == "LB"){
+                symbol = "L.L."
+            }
+            console.log("called")
+            findTheOne(ID,user)
+            findTheOne(currencyElem,symbol)
             
-            let image_data_url = canvas.toDataURL('image/jpeg');
+          }
+          
+          function onScanFailure(error) {
+            // handle scan failure, usually better to ignore and keep scanning.
+            // for example:
+            console.warn(`Code scan error = ${error}`);
+          }
+          
+          let html5QrcodeScanner = new Html5QrcodeScanner(
+            "reader",
+            { fps: 10, qrbox: {width: 250, height: 250} },
+            /* verbose= */ false);
+          html5QrcodeScanner.render(onScanSuccess, onScanFailure);
 
-            stream.getTracks().forEach(function(track) {
-                track.stop();
-              });
-            console.log(image_data_url);
-        });
     </script>
+
 {% endblock %}
