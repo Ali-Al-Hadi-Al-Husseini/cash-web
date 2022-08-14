@@ -7,7 +7,7 @@ from .utils import query_user
 
 class RegistrationForm (UserCreationForm):
     email= forms.EmailField (required=True)
-    pay_pin = forms.IntegerField(required=True)
+    pay_pin = forms.CharField(required=True)
     
     def clean_email(self):
         email = self.cleaned_data.get("email")
@@ -31,7 +31,7 @@ class RegistrationForm (UserCreationForm):
 
 
 class TransactionForm(forms.ModelForm):
-    pay_pin = forms.IntegerField(required=True)
+    pay_pin = forms.CharField(required=True)
     amount = forms.DecimalField(required=True,min_value=0)
 
     def clean_currency_type(self):

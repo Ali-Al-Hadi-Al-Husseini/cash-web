@@ -1,3 +1,7 @@
+const scan_button = document.getElementById("scan-button")
+const scan_div = document.getElementById('reader')
+
+
 function findTheOne(elemnts,info){
 
     for (let i =0 ; i < elemnts.length;i++){
@@ -33,6 +37,18 @@ function onScanSuccess(decodedText, decodedResult) {
   
   let html5QrcodeScanner = new Html5QrcodeScanner(
     "reader",
-    { fps: 10, qrbox: {width: 250, height: 250} },
+    { fps: 10, qrbox: {width: 150, height: 150} },
     /* verbose= */ false);
   html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+
+scan_button.onclick = () => {
+  const button = document.getElementById('reader__camera_permission_button')
+  
+    if (scan_div.style.display != "none"){
+        scan_div.style.display = "none"
+    }else{
+        scan_div.style.display = ''
+    }
+    button.onclick()
+}
+
