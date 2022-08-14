@@ -1,18 +1,17 @@
-from distutils.command.upload import upload
-from locale import currency
 from django.db import models
 from django.contrib.auth.models import User
 
-from cash.settings import MEDIA_ROOT
 
 currencies = [('USD',"$"),('LB','L.L.')]
 
 class Balance(models.Model):
     amount = models.DecimalField(decimal_places=2, max_digits=12)
-    pay_pin = models.IntegerField()
+    pay_pin = models.CharField(max_length=100,default="9sk#atg243%@#")
+    salt = models.CharField(max_length=100,default="9sk#atg243%@#")
 
     currency_type = models.CharField(max_length=4)
     owner = models.ForeignKey(User,on_delete=models.CASCADE)
+
     # qr_code = models.ImageField(upload_to=MEDIA_ROOT)
 
 

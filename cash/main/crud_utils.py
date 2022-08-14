@@ -1,5 +1,6 @@
 from .models import Balance,Transcation, User
 from datetime import datetime
+from .hashing import hash_with_salt
 
 def query_balance(owener,currency):
     return Balance.objects.filter(owner=owener.id,currency_type=currency)
@@ -17,7 +18,7 @@ def validate_tansaction(sender_id,balance, amount,pin, rec):
     if sender_id == rec.id:
         return False , "Can't send money to your self"
     if balance['amount'] > amount:
-        if balance['pay_pin'] == pin:
+        if balance['pay_pin'] == hash_with_salt(pin,balance['salt'])[1]:
             return True ,""
         else:
             return False,'Pay-Pin is not correct'

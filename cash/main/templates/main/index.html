@@ -7,14 +7,15 @@
 
     <div class="balance-container">
         <div class="card card-width" style="width: 20rem;">
-        <img class="card-img-top" src="{% static usd_qrcode  %}" alt="Card image cap">
+        <div class="card-img-top qr_code_display" id="us_qrcode"></div>
         <div class="card-body">
             <h3 class="card-title">Balance: {{usd_balance|escape}}$</h5>
         </div>
         </div>
 
         <div class="card card-width" style="width: 20rem;">
-        <img class="card-img-top" src="{% static lb_qrcode  %}" alt="Card image cap">
+        <div class="card-img-top qr_code_display" id="lb_qrcode"></div>
+        
         <div class="card-body">
             <h3 class="card-title">Balance: {{lb_balance|escape}}L.L</h5>
         </div>
@@ -39,7 +40,7 @@
                             background-color: #f8d7da;
                             border-color: #f5c6cb;">
 
-                    <td>{{trans.|escape}}</td>
+                    <td>{{trans.0|escape}}</td>
                     <td>{{trans.1|escape}} </td>
                     <td> -{{trans.2|escape}}</td>
                     <td>{{trans.3|escape}}</td>
@@ -63,4 +64,11 @@
     </table>
             <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>    
+
+    <script>
+        new QRCode(document.getElementById("us_qrcode"), "{{usd_qrcode}}"); 
+        new QRCode(document.getElementById("lb_qrcode"), "{{lb_qrcode}}"); 
+
+    </script>
 {% endblock %}

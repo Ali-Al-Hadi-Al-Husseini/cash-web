@@ -78,12 +78,17 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'cash.wsgi.application'
-
+PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(PROJECT_DIR, 'yourdatabasename.db'),
+    # }
+
     'default': {
         'NAME' : 'postgesql',
         'HOST' : 'ec2-54-228-125-183.eu-west-1.compute.amazonaws.com',

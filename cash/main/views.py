@@ -10,16 +10,18 @@ from django.contrib import messages
 @login_required(login_url="/login")
 def main(req):
     args = {}
+    usd_balance = query_balance(req.user,'USD').values()[0]
+    lb_balance = query_balance(req.user,'LB').values()[0]
     transactions = get_transactions(req.user.id)
     
     args['transactions'] = transactions
     args["id"] = req.user.id
 
-    args['lb_balance'] = query_balance(req.user,'LB').values()[0]["amount"]
-    args['usd_balance'] = query_balance(req.user,'USD').values()[0]["amount"]
-    args['lb_qrcode'] = f"qrcode/{req.user}_--_LB.png"
-    args['usd_qrcode'] = f"qrcode/{req.user}_--_USD.png"
+    args['lb_balance'] = lb_balance["amount"]
+    args['usd_balance'] = usd_balance["amount"]
 
+    args['lb_qrcode'] = f"{req.user}_--_LB"
+    args['usd_qrcode'] = f"{req.user}_--_USD"
 
     return render(req,"main/index.html",args)
 
