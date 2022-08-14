@@ -66,9 +66,5 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>    
 
-    <script>
-        new QRCode(document.getElementById("us_qrcode"), "{{usd_qrcode}}"); 
-        new QRCode(document.getElementById("lb_qrcode"), "{{lb_qrcode}}"); 
-
-    </script>
+    <script src="{% static '/javscript/gen_qr.js'%}"></script>
 {% endblock %}
