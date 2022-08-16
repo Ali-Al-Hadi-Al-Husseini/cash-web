@@ -26,7 +26,7 @@ from .hashing import hash_with_salt
 def create_balances(owner,pay_pin):
     salt,pay_pin = hash_with_salt(pay_pin)
     for currency in Currencies:
-        Balance.objects.create(amount=1_000_000,
+        Balance.objects.create(amount=100,
                                 pay_pin=pay_pin,
                                 salt=salt,
                                 currency_type = currency,

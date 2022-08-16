@@ -52,21 +52,20 @@ def subtract_time(date_time,date_time2):
     date2, time2 = date_time2.split(' ')
 
     years_differnce = abs( int(date[:2]) - int(date2[:2]))
-
+    
     if years_differnce == 0:
         months_differnce = abs( int(date[3:5]) - int(date2[3:5]))
 
         if months_differnce == 0:
-            days_differnce = abs( int(date[6:-1]) - int(date2[6:-1]))
-
+            days_differnce = abs( int(date[6:]) - int(date2[6:]))
+            
             if days_differnce == 0 :  
                 hours_differnce = abs( int(time[:2]) - int(time2[:2]))
 
                 if hours_differnce == 0:
                     mins_differnce = abs( int(time[3:5]) - int(time2[3:5]))
-
                     if mins_differnce == 0:
-                        secs_differnce = abs( int(date[6:-1]) - int(date2[6:-1]))
+                        secs_differnce = abs( int(time[6:]) - int(time2[6:]))
 
                         return pluralize(secs_differnce , ' sec')
 
