@@ -27,7 +27,7 @@ SECRET_KEY = 'A$f242^#$svasd*as&^%$1V#!B^$X@523c52323c3C%@#2c3fsdfd'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # "cashweb.herokuapp.com","herokuapp.com",".herokuapp.com"
-ALLOWED_HOSTS = ["cashweb.herokuapp.com"]
+ALLOWED_HOSTS = ['127.0.0.1',"cashweb.herokuapp.com"] 
 
 
 # Application definition
@@ -87,28 +87,44 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 #for testing
-DATABASES = {
-        'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'yourdatabasename.db'),
-    }
-}
 # DATABASES = {
-#     #     'default': {
-#     #     'ENGINE': 'django.db.backends.sqlite3',
-#     #     'NAME': os.path.join(BASE_DIR, 'yourdatabasename.db'),
-#     # }
-#     'default': {
-#         'HOST' : 'ec2-54-229-217-195.eu-west-1.compute.amazonaws.com',
-#         'NAME' : 'df6gj5eve8e602',
-#         'USER' : 'fugyqgkyclfeih',
-#         'PORT' :'5432',
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'PASSWORD' :'3c3ce4af46ffc52dbd157d69e2c0c62353bbbbd72510ca811f968d49c33ebbdc' ,
-        
+#         'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'yourdatabasename.db'),
 #     }
 # }
 
+#for production i would use enviorment variables 
+DATABASES = {
+    #     'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR, 'yourdatabasename.db'),
+    # }
+    'default': {
+        'HOST' : 'ec2-54-229-217-195.eu-west-1.compute.amazonaws.com',
+        'NAME' : 'df6gj5eve8e602',
+        'USER' : 'fugyqgkyclfeih',
+        'PORT' :'5432',
+        'ENGINE': 'django.db.backends.postgresql',
+        'PASSWORD' :'3c3ce4af46ffc52dbd157d69e2c0c62353bbbbd72510ca811f968d49c33ebbdc' ,
+        
+    }
+}
+#uncomment wehn debugging
+# DEBUG_PROPAGATE_EXCEPTIONS = True
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'handlers': {
+#         'console': {
+#             'class': 'logging.StreamHandler',
+#         },
+#     },
+#     'root': {
+#         'handlers': ['console'],
+#         'level': 'WARNING',
+#     },
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -141,15 +157,24 @@ USE_TZ = True
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'main','static','qrcode')
 
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    # 'django.contrib.staticfiles.finders.AppDirectoriesFinder',   
+)
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
-
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'cash','static')
+STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
+
 STATICFILES_DIRS = [
-#    str(BASE_DIR)+ '\\main\\static',
-# os.path.join(BASE_DIR,'/main/static'),
    os.path.join(BASE_DIR, 'main','static'),
+   os.path.join(BASE_DIR, 'main','static','javascript'),
+   os.path.join(BASE_DIR, 'main','static','css'),
+   os.path.join(BASE_DIR, 'main','static','images'),
+   os.path.join(BASE_DIR, 'main','static','qrcode'),
+
 ]
 
 # Default primary key field type
@@ -165,7 +190,7 @@ CORS_ALLOW_ALL_ORIGINS = True # If this is used then `CORS_ALLOWED_ORIGINS` will
 CORS_ALLOW_CREDENTIALS = True
 
 #security 
-security = False
+security = True
 SESSION_COOKIE_SECURE = security
 CSRF_COOKIE_SECURE = security
 SECURE_SSL_REDIRECT  = security
