@@ -1,4 +1,3 @@
-import qrcode
 from .crud_utils import *
 from .constants import Currencies
 from .hashing import hash_with_salt

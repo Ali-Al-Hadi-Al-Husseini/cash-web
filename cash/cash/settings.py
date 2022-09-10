@@ -86,21 +86,28 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+#for testing
 DATABASES = {
-    #     'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': os.path.join(BASE_DIR, 'yourdatabasename.db'),
-    # }
-    'default': {
-        'HOST' : 'ec2-34-248-169-69.eu-west-1.compute.amazonaws.com',
-        'NAME' : 'd8lm2t5962uvbp',
-        'USER' : 'kqzkzmhdonxpvv',
-        'PORT' :'5432',
-        'ENGINE': 'django.db.backends.postgresql',
-        'PASSWORD' :'e560688136bd7506c5ede193a7257fc08ce337d89c2384988545b0c11832b28a' ,
-        
+        'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'yourdatabasename.db'),
     }
 }
+# DATABASES = {
+#     #     'default': {
+#     #     'ENGINE': 'django.db.backends.sqlite3',
+#     #     'NAME': os.path.join(BASE_DIR, 'yourdatabasename.db'),
+#     # }
+#     'default': {
+#         'HOST' : 'ec2-54-229-217-195.eu-west-1.compute.amazonaws.com',
+#         'NAME' : 'df6gj5eve8e602',
+#         'USER' : 'fugyqgkyclfeih',
+#         'PORT' :'5432',
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'PASSWORD' :'3c3ce4af46ffc52dbd157d69e2c0c62353bbbbd72510ca811f968d49c33ebbdc' ,
+        
+#     }
+# }
 
 
 # Password validation
@@ -121,7 +128,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# ADMINS = [["lilo",'moudy.vliax@gmail.com'],'alihadi.alhousseini@gmail.com']
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
@@ -133,7 +139,7 @@ USE_I18N = True
 
 USE_TZ = True
 
-MEDIA_ROOT = str(BASE_DIR) + "\\main\\static\\qrcode/"
+MEDIA_ROOT = os.path.join(BASE_DIR, 'main','static','qrcode')
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
@@ -159,11 +165,12 @@ CORS_ALLOW_ALL_ORIGINS = True # If this is used then `CORS_ALLOWED_ORIGINS` will
 CORS_ALLOW_CREDENTIALS = True
 
 #security 
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-SECURE_SSL_REDIRECT  = True
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-SECURE_HSTS_PRELOAD  = True
+security = False
+SESSION_COOKIE_SECURE = security
+CSRF_COOKIE_SECURE = security
+SECURE_SSL_REDIRECT  = security
+SECURE_HSTS_INCLUDE_SUBDOMAINS = security
+SECURE_HSTS_PRELOAD  = security
 SECURE_HSTS_SECONDS = 60
 
 
