@@ -48,8 +48,8 @@ def get_transactions_time(transcation):
     return time_ago
 
 def subtract_time(date_time,date_time2):
-    date, time = date_time.split(' ')
-    date2, time2 = date_time2.split(' ')
+    date2, time2 = date_time.split(' ')
+    date, time = date_time2.split(' ')
 
     years_differnce = abs( int(date[:2]) - int(date2[:2]))
     

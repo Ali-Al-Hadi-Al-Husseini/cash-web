@@ -87,29 +87,29 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 #for testing
-# DATABASES = {
-#         'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'yourdatabasename.db'),
-#     }
-# }
-
-#for production i would use enviorment variables 
 DATABASES = {
-    #     'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': os.path.join(BASE_DIR, 'yourdatabasename.db'),
-    # }
-    'default': {
-        'HOST' : 'ec2-54-229-217-195.eu-west-1.compute.amazonaws.com',
-        'NAME' : 'df6gj5eve8e602',
-        'USER' : 'fugyqgkyclfeih',
-        'PORT' :'5432',
-        'ENGINE': 'django.db.backends.postgresql',
-        'PASSWORD' :'3c3ce4af46ffc52dbd157d69e2c0c62353bbbbd72510ca811f968d49c33ebbdc' ,
-        
+        'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'yourdatabasename.db'),
     }
 }
+
+#for production i would use enviorment variables 
+# DATABASES = {
+#     #     'default': {
+#     #     'ENGINE': 'django.db.backends.sqlite3',
+#     #     'NAME': os.path.join(BASE_DIR, 'yourdatabasename.db'),
+#     # }
+#     'default': {
+#         'HOST' : 'ec2-54-229-217-195.eu-west-1.compute.amazonaws.com',
+#         'NAME' : 'df6gj5eve8e602',
+#         'USER' : 'fugyqgkyclfeih',
+#         'PORT' :'5432',
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'PASSWORD' :'3c3ce4af46ffc52dbd157d69e2c0c62353bbbbd72510ca811f968d49c33ebbdc' ,
+        
+#     }
+# }
 #uncomment wehn debugging
 # DEBUG_PROPAGATE_EXCEPTIONS = True
 # LOGGING = {

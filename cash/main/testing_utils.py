@@ -26,7 +26,7 @@ def create_user():
     
     user = User.objects.create(username=usr['username'],email=usr['email'],password=usr['password'])
     create_balances(user,usr['pay_pin'])
-    return user
+    return user,usr
 
 def create_trans(sen,rec,am,cur):
     return Transcation.objects.create(sender=sen,receiver=rec,date_time=datetime.now(),amount=am,currency_type=cur)
