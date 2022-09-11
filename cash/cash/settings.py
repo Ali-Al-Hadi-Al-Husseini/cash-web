@@ -101,12 +101,12 @@ DATABASES = {
     #     'NAME': os.path.join(BASE_DIR, 'yourdatabasename.db'),
     # }
     'default': {
-        'HOST' : ''
-        'NAME' : '',
-        'USER' : '',
-        'PORT' :'',
+        'HOST' : 'ec2-54-229-217-195.eu-west-1.compute.amazonaws.com',
+        'NAME' : 'df6gj5eve8e602',
+        'USER' : 'fugyqgkyclfeih',
+        'PORT' :'5432',
         'ENGINE': 'django.db.backends.postgresql',
-        'PASSWORD' :'' ,
+        'PASSWORD' :'3c3ce4af46ffc52dbd157d69e2c0c62353bbbbd72510ca811f968d49c33ebbdc' ,
         
     }
 }
