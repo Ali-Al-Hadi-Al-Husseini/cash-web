@@ -1,7 +1,111 @@
+body{
+    background-color: #f8f9fb;
+}
+input{
+    box-shadow: 0 2px 4px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.08);
+    border: none;
+
+}
+select{
+    box-shadow: 0 2px 4px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.08);
+    border: none;
+}
+.custom_btn_dark{
+    color: white;
+    background-color: #1c1d1f;
+}
+.custom_btn_lite{
+    color: #1c1d1f;
+    background-color: white;
+}
+.custom_btn{
+    position: relative;
+    margin: 0;
+    min-width: 4rem;
+    max-width: 8rem;
+    height: 3rem;
+    padding: 0 1.2rem;
+
+    border-radius: 0;
+    
+    box-sizing: border-box;
+    box-shadow: 0 2px 4px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.08);
+   
+
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: udemy sans,-apple-system,BlinkMacSystemFont,Roboto,segoe ui,Helvetica,Arial,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol;
+    letter-spacing: -.02rem;
+    font-weight: bold;
+}
+/* .btn-color{
+    background-color: #7325a3;
+    border: none;
+} */
+.nav-container{
+    box-shadow:  0 2px 4px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.08);
+}
+
+.cutom_nav{
+    background-color: white !important;
+}
+.custome_nav_link{
+    color:#1c1d1f;
+    font-size: medium;
+    font-weight: bold;
+}
+
+.custome_nav_link:hover{
+    color: #1c1d1f !important;
+}
+
+.hover-underline-animation {
+    display: inline-block;
+    position: relative;
+    color: #7325a3  ;
+  }
+
+.hover-underline-animation:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #7325a3;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+  }
+  
+.hover-underline-animation:hover:after {
+    color:#1c1d1f;
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+.custom_container{
+    background-color: #f8f9fb;
+}
+.custom_card_width{
+    width: 18rem;
+    border:none !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.08);
+}
+.custom_card_title{
+    margin-bottom:0rem ;
+    font-size: 1.5rem !important;
+}
+/*  button colore #7325a3 */
+/* background coolor #f8f9fb */
 .qr_code_display{
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    top:10px;
+    
 }
 .half{
     width: 40%;

@@ -6,18 +6,18 @@
 {% block content %}
 
     <div class="balance-container">
-        <div class="card card-width" style="width: 20rem;">
+        <div class="card custom_card_width" >
         <div class="card-img-top qr_code_display" id="us_qrcode"></div>
         <div class="card-body">
-            <h3 class="card-title">Balance: {{usd_balance|escape}}$</h5>
+            <h3 class="custom_card_title card-title">Balance: {{usd_balance|escape}}$</h5>
         </div>
         </div>
 
-        <div class="card card-width" style="width: 20rem;">
+        <div class="card custom_card_width" >
         <div class="card-img-top qr_code_display" id="lb_qrcode"></div>
         
         <div class="card-body">
-            <h3 class="card-title">Balance: {{lb_balance|escape}}L.L</h5>
+            <h3 class=" custom_card_title">Balance: {{lb_balance|escape}}L.L</h5>
         </div>
         </div>
     </div>

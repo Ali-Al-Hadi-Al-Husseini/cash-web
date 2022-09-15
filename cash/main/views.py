@@ -27,6 +27,7 @@ def main(req):
 
 @login_required(login_url="/login")
 def transact(req):
+    authenticate(req)
     form, form_is_valid = validate_form(req,TransactionForm)
 
     if form_is_valid:
