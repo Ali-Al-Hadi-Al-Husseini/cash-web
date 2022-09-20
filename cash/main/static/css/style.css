@@ -1,15 +1,32 @@
 body{
     background-color: #f8f9fb;
 }
+img{
+    max-height: 200px;
+    max-width: 200px;
+    
+}
+body,html{
+    height: 100%;
+}
 input{
     box-shadow: 0 2px 4px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.08);
-    border: none;
+    border: none !important;
+    border-radius: 0 !important;
+    border: solid 1px black !important;
 
 }
 select{
     box-shadow: 0 2px 4px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.08);
     border: none;
+    border: none !important;
+    border-radius: 0 !important;
+    border: solid 1px black !important;
 }
+span{
+    color: black !important;
+}
+
 .custom_btn_dark{
     color: white;
     background-color: #1c1d1f;
@@ -20,18 +37,16 @@ select{
 }
 .custom_btn{
     position: relative;
-    margin: 0;
+    /* margin: 0; */
     min-width: 4rem;
     max-width: 8rem;
     height: 3rem;
     padding: 0 1.2rem;
 
     border-radius: 0;
-    
+    border: solid 1px black; 
     box-sizing: border-box;
-    box-shadow: 0 2px 4px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.08);
    
-
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -50,11 +65,15 @@ select{
 
 .cutom_nav{
     background-color: white !important;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    
 }
 .custome_nav_link{
     color:#1c1d1f;
     font-size: medium;
     font-weight: bold;
+    
 }
 
 .custome_nav_link:hover{
@@ -92,6 +111,7 @@ select{
     width: 18rem;
     border:none !important;
     box-shadow: 0 2px 4px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.08);
+    margin-top: 7px;
 }
 .custom_card_title{
     margin-bottom:0rem ;
@@ -136,3 +156,99 @@ select{
     display: inline-block;
     font-size: 16px;
 }
+.custom-input{
+    border-radius: 0;
+    border: solid 1px black;
+}
+.buttons-container{
+    display: flex;
+    justify-content: space-between;
+}
+.container{
+    margin-top: 0%;
+    height: 80%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.signup-contianer{
+    margin-top: 4%;
+    height: 75%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+div > small{
+    display: None;
+}
+#openfile{
+    position: relative;
+    margin: 0;
+    min-width: 2rem;
+    max-width: 4rem;
+    height: 3rem;
+    padding: 0 1.2rem;
+
+    border-radius: 0;
+    border: solid 1px black; 
+    box-sizing: border-box;
+   
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: udemy sans,-apple-system,BlinkMacSystemFont,Roboto,segoe ui,Helvetica,Arial,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol;
+    letter-spacing: -.02rem;
+    font-weight: bold;
+}
+#openfile::-webkit-file-upload-button {
+    visibility: hidden;
+  }
+
+#openfile::before {
+    content: 'Select some files';
+    display: inline-block;
+    background: linear-gradient(top, #f9f9f9, #e3e3e3);
+    border: 1px solid #999;
+    border-radius: 3px;
+    padding: 5px 8px;
+    outline: none;
+    white-space: nowrap;
+    /* -webkit-user-select: none; */
+    cursor: pointer;
+    text-shadow: 1px 1px #fff;
+    font-weight: 700;
+    font-size: 10pt;
+    
+  }
+
+#reader{
+    margin-top: 5px;
+    margin-left: 20px;
+    max-width: 200px;
+    max-height: 200px;
+    position: relative;
+    display: block;
+    left: -100px;
+}
+
+@media only screen and (max-width: 400px) {
+    .buttons-container{
+        display: block;
+    }
+    #reader{
+        max-width: 150px;
+        max-height: 150px;
+        position: relative;
+        left:75px
+    }
+
+  }
+  /* @media only screen and (max-width: 800px) {
+
+    .custom_container{
+        margin-top: 12% !important;
+    }
+} */

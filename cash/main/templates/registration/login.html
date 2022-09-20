@@ -3,11 +3,14 @@
 {%block head %}
 {%endblock%}
 {% block title %}Login{% endblock %} 
-{% load crispy_forms_tags %} {% block content %}
-<form method="post">
-  {% csrf_token %}{{form|crispy}}
-  <p>Don't have an account? Create one <a href="/signup">Here</a>!</p>
-  <button type="submit" class="custom_btn custom_btn_lite"> <span>Log in</span></button>
-</form>
+{% load crispy_forms_tags %} 
 
-{% endblock %}
+    {% block content %}
+        <div class="form-container">
+            <form method="post">
+                {% csrf_token %}{{form|crispy}}
+                <p>Don't have an account? Create one <a href="/signup">Here</a>!</p>
+                <button type="submit" class="custom_btn custom_btn_lite"> <span>Log in</span></button>
+            </form>
+        </div>
+    {% endblock %}

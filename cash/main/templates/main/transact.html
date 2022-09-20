@@ -26,10 +26,19 @@
     {% endfor %}
     <form method="post">
     {% csrf_token %}{{form|crispy}}
-    <button type="submit" class="custom_btn">Send</button>
-    <button type="button" class="custom_btn" id="scan-button">Scan</button>
-    <div id="reader" width="600px" style="display:none ;"></div>
-
+    <div class="buttons-container">
+        <div class="input-container">
+        <button type="submit" class="custom_btn custom_btn_lite">Send</button>
+        <button type="button" class="custom_btn custom_btn_dark" id="scan-button">Scan</button>
+        <input type="file"
+        id="openfile" name="avatar"
+        accept="image/png, image/jpeg"
+        title="" 
+        hidden/> 
+        <label for="openfile" class="custom_btn custom_btn_dark">File</label>
+    </div>
+        <div id="reader" width="600px" style="display:none ;"></div>
+    </div>
     </form>
     <script src="{% static 'scan_qr.js' %}"></script>
 
