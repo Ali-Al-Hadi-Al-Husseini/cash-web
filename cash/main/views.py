@@ -52,7 +52,7 @@ def transact(req):
             messages.success(req, f"{transaction.amount} {transaction.currency_type} was sent to {transaction.receiver} successfully")
             return redirect("/transact")
         
-        messages.warning(req, transaction_error)
+        messages.warning(req, transaction_error) 
 
     return render(req,"main/transact.html",{'form':form})
 

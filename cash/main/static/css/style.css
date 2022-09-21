@@ -23,10 +23,25 @@ select{
     border-radius: 0 !important;
     border: solid 1px black !important;
 }
-span{
+ul > span{
     color: black !important;
 }
+strong > span{
+    position: relative;
+    top: 2px;
+}
+.custom_btn_dark > button > strong >span{
+    color: white !important;
+    
+}
+.custom_btn_lite > button > strong >span{
+    color: black !important;
+    
+}
+.custom_container > .alert {
+    border: solid 1px black;
 
+}
 .custom_btn_dark{
     color: white;
     background-color: #1c1d1f;
@@ -172,6 +187,10 @@ span{
     justify-content: center;
     align-items: center;
 }
+.transact-contaier{
+    flex-direction: column;
+
+}
 .signup-contianer{
     margin-top: 4%;
     height: 75%;
@@ -182,6 +201,9 @@ span{
 }
 div > small{
     display: None;
+}
+form{
+    min-width: 275px;
 }
 #openfile{
     position: relative;

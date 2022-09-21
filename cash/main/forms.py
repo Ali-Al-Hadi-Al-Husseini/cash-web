@@ -24,7 +24,8 @@ class RegistrationForm (UserCreationForm):
         if len(int_str) < 6:
             raise forms.ValidationError("Pay-pin should be aleast 6-digits")
         return pay_pin
-        
+    
+
     class Meta:
         model = User
         fields = ["username", "email", 'pay_pin',"password1", "password2"]
