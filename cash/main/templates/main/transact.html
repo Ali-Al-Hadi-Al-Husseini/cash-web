@@ -6,6 +6,7 @@
 <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
 {%endblock%}
 {% block content %}
+    <div class="transact-container">
     {% for msg in messages%}
         {%if msg.tags == 'warning' %}
             <div class="alert alert-danger alert-dismissible fade show custom_btn_dark"  role="alert">
@@ -40,6 +41,7 @@
         <div id="reader" width="600px" style="display:none ;"></div>
     </div>
     </form>
+</div>
     <script src="{% static 'scan_qr.js' %}"></script>
 
 {% endblock %}
