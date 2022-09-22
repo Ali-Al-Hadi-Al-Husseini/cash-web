@@ -121,6 +121,8 @@ strong > span{
   }
 .custom_container{
     background-color: #f8f9fb;
+    flex-direction: column;
+
 }
 .custom_card_width{
     width: 18rem;
@@ -180,7 +182,7 @@ strong > span{
     justify-content: space-between;
 }
 .container{
-    margin-top: 0%;
+    margin-top: 2%;
     height: 80%;
     width: 100%;
     display: flex;
@@ -266,11 +268,25 @@ form{
         position: relative;
         left:75px
     }
+    .custom_container{
+        flex-direction: column;
+
+        margin-top: 38%;
+    }
 
   }
-  /* @media only screen and (max-width: 800px) {
+  @media only screen and (max-width: 800px) and (min-width: 601px) {
 
     .custom_container{
-        margin-top: 12% !important;
+        flex-direction: column;
+        margin-top: 20%;
     }
-} */
+}
+@media only screen and (max-width: 600px) and (min-width: 401px) {
+
+    .custom_container{
+        flex-direction: column;
+        margin-top: 31%;
+    }
+}
+
