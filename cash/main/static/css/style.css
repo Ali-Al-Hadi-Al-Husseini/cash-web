@@ -120,8 +120,7 @@ strong > span{
     transform-origin: bottom left;
   }
 .custom_container{
-    background-color: #f8f9fb;
-    flex-direction: column;
+    background-color: #f8f9fb; 
 
 }
 .custom_card_width{
