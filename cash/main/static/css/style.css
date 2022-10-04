@@ -285,7 +285,10 @@ form{
 
     .custom_container{
         flex-direction: column;
-        margin-top: 31%;
+        margin-top: -6%;
     }
+    .balance-container {
+        margin-left: 45px;
+      }
 }
 
