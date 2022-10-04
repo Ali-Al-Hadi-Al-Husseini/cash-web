@@ -290,5 +290,14 @@ form{
     .balance-container {
         margin-left: 45px;
       }
+    .transact-container{
+        margin-top: -40%;
+    }
+    .form-container{
+        margin-top:-35%;
+    }
+    .signup-contianer{
+        margin-top:-5%;
+    }
 }
 
